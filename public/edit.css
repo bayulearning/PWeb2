@@ -1,0 +1,134 @@
+/* Tambahkan gaya umum untuk halaman */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 20px;
+  padding: 0;
+}
+
+/* Container utama untuk form */
+.container {
+  margin: 50px auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Judul halaman */
+h1 {
+  text-align: center;
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* Form group untuk setiap elemen form */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Label untuk form */
+label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+/* Input text dan textarea */
+input[type="text"],
+textarea,
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+input[type="file"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* Tombol submit */
+button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Tombol Hapus (kalau ada) */
+button[type="button"].btn-delete {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="button"].btn-delete:hover {
+  background-color: #c82333;
+}
+
+/* Pesan error (jika ada) */
+.alert {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+/* Styling untuk form input file */
+input[type="file"] {
+  padding: 5px;
+}
+
+/* Styling untuk tombol navigasi (edit, delete) */
+a.btn {
+  text-decoration: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-right: 10px;
+  transition: background-color 0.3s;
+}
+
+a.btn-edit {
+  background-color: #28a745;
+}
+
+a.btn-edit:hover {
+  background-color: #218838;
+}
+
+a.btn-delete {
+  background-color: #dc3545;
+}
+
+a.btn-delete:hover {
+  background-color: #c82333;
+}
