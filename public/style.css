@@ -1,0 +1,280 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  line-height: 1; /* Pastikan tinggi html dan body 100% agar bisa mengambil seluruh layar */
+  margin: 0; /* Menghilangkan margin default */
+  font-size: 100%;
+  display: flex;
+  flex-direction: column; /* Mengatur agar elemen di dalamnya disusun secara vertikal */
+  padding: 0;
+}
+
+h1 {
+  font-size: 50px;
+  font-style: bold;
+}
+
+p {
+  font-size: 20px;
+}
+
+.nav-bar {
+  position: fixed;
+  width: 100vw; /* Lebih eksplisit daripada 100% */
+  height: 50px;
+  background-color: rgb(8, 104, 72);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px; /* Padding kanan dan kiri */
+}
+
+.nav-bar a {
+  display: inline-block;
+  color: #ffffff;
+  margin: 0 15px; /* Memberi jarak horizontal antar link */
+  text-decoration: none; /* Menghilangkan garis bawah pada link */
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+.container {
+  background-image: url("/gambar/maxresdefault.jpg");
+  display: flex;
+  justify-content: space-between; /* Menyebarkan konten dan sidebar */
+  height: 100%;
+  gap: 10px;
+  margin: 10px 10px 0 10px;
+  box-shadow: 0 0 1em #cccccc;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.content-about {
+  width: 100%; /* Lebar konten about */
+  height: max-content;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.sidebar-content {
+  width: 30%; /* Lebar sidebar */
+  height: max-content;
+  padding: 20px;
+  background-color: #e0e0e0;
+}
+
+.title {
+  width: 100%;
+  height: 100%;
+}
+
+.title a {
+  display: grid;
+}
+
+.footer {
+  margin: 0 10px 0 10px;
+  width: 100%;
+  height: auto;
+  background-color: black;
+  align-items: center;
+}
+.footer p {
+  color: #e0e0e0;
+}
+
+.card-container {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+}
+
+.card-view {
+  display: grid;
+  width: auto;
+  height: auto;
+  align-items: center;
+}
+
+.card-view img {
+  width: auto;
+  height: auto;
+  align-items: center;
+}
+
+.page-constraint {
+  background-color: rgba(8, 104, 72, 0.418);
+  width: 100%;
+  height: 50px;
+  border-radius: 10%;
+}
+
+.card-container2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card-view2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card-view2 img {
+  max-width: auto;
+  height: auto;
+}
+
+.card-view2 p {
+  max-width: 500px;
+  overflow-wrap: break-word;
+}
+
+/* Mengatur tampilan umum untuk tabel */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Mengatur tampilan header tabel */
+.table thead {
+  background-color: #165818;
+  color: white;
+}
+
+.table th,
+.table td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+/* Mengatur tampilan baris tabel */
+.table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Menambahkan efek hover pada baris tabel */
+.table tbody tr:hover {
+  background-color: #ddd;
+}
+
+/* Mengatur tampilan tombol */
+.btn {
+  display: flex;
+  padding: 8px 15px;
+  margin: 5px;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+/* Mengatur tampilan tombol yang bertipe danger */
+.btn-danger {
+  margin-top: 10px;
+  background-color: #f44336;
+}
+
+/* .logout {
+  height: 30px;
+  background-color: #45a049;
+  border: none;
+  border-radius: 5px;
+}
+.logout:active {
+  background-color: #ccc;
+} */
+
+.btn-danger:hover {
+  background-color: #e53935;
+}
+
+/* Mengatur tampilan footer tabel */
+.table tfoot {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+.table tfoot th {
+  text-align: center;
+}
+
+/* Mengatur tampilan umum form */
+form {
+  margin: 5px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Mengatur tampilan setiap input dan textarea */
+form p {
+  margin-bottom: 15px;
+}
+
+/* Mengatur tampilan input text */
+form input[type="text"],
+form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Mengatur tampilan textarea */
+form textarea {
+  resize: vertical;
+}
+
+/* Mengatur tampilan tombol kirim */
+form input[type="submit"].btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Menambahkan efek hover pada tombol kirim */
+form input[type="submit"].btn:hover {
+  background-color: #45a049;
+}
+
+/* Mengatur tampilan untuk input dan textarea saat fokus */
+form input[type="text"]:focus,
+form textarea:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+/* Menambahkan efek focus pada tombol kirim */
+form input[type="submit"]:focus {
+  outline: none;
+}
