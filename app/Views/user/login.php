@@ -26,7 +26,7 @@
 <br>
         <div>
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required>
+            <input type="password" name="password" id="password" autocomplete="new-password" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Login</button>

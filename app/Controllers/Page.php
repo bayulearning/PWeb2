@@ -8,7 +8,7 @@ return view('home',[ 'title' => '', 'content' => '']);
 }
 public function about()
 {
-return view('about', [ 'title' => 'Website Warga RT 15', 'content' => '' ]);
+return view('about', [ 'title' => 'Website Wargaku', 'content' => '' ]);
 }
 public function contact()
 {

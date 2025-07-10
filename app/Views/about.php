@@ -8,7 +8,7 @@
     </head> 
 <body>
     <div>
-        <h1><?= $title; ?></h1> 
+        <h1 class="judul-title"><?= $title; ?></h1> 
         <hr> 
         <p><?= $content; ?></p> 
     </div>

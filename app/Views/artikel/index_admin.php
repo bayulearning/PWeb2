@@ -1,10 +1,11 @@
 <?= $this->include('template/admin_header'); ?>
 
 <?php if($artikel): foreach($artikel as $row): ?>
+<div class="pengumuman">
 <article class="entry">
     <!-- Judul Artikel yang Dapat Diklik -->
     <h2>
-        <a href="<?= base_url('/artikel/' . $row['slug']); ?>">
+        <a href="<?= base_url('/pengumuman/' . $row['slug']); ?>">
             <?= $row['judul']; ?>
         </a>
     </h2>
@@ -22,5 +23,6 @@
     <h2>Belum ada data.</h2>
 </article>
 <?php endif; ?>
+</div>
 
 <?= $this->include('template/admin_footer'); ?>

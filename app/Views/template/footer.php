@@ -1,12 +1,12 @@
 </section> 
-<aside id="sidebar" class="sidebar-content"> 
-        </div> 
-        <div class="widget-box"> 
-            <h3 class="title">Widget Text</h3> 
-            <p>Vestibulum lorem elit, iaculis in nisl volutpat, malesuada tincidunt arcu. Proin in leo fringilla,
-                 vestibulum mi porta, faucibus felis. Integer pharetra est nunc, nec pretium nunc pretium ac.</p> 
-                </div> 
-            </aside> 
+    <aside id="sidebar" class="sidebar-content"> 
+            </div> 
+            <div class="widget-box"> 
+                <h3 class="title">Widget Text</h3> 
+                <p>Vestibulum lorem elit, iaculis in nisl volutpat, malesuada tincidunt arcu. Proin in leo fringilla,
+                    vestibulum mi porta, faucibus felis. Integer pharetra est nunc, nec pretium nunc pretium ac.</p> 
+                    </div> 
+                </aside> 
         </section> 
         </div>
         <footer class="footer"> 

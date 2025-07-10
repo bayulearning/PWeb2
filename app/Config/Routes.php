@@ -16,6 +16,8 @@ $routes->get('artikel/index', 'Artikel::index');
 $routes->get('artikel/index_admin', 'Artikel::indexadmin');
 $routes->get('artikel/form_add', 'Artikel::add');
 
+$routes->get('/pengumuman/(:any)', 'Artikel::view_berita/$1');
+$routes->get('/user_detail/(:any)', 'Artikel::view_user/$1');
 $routes->get('/artikel/(:any)', 'Artikel::view/$1');
 $routes->get('user/login', 'User::login');
 $routes->post('user/login', 'User::login');
@@ -26,6 +28,7 @@ $routes->group('admin', ['filter' => 'auth'], function($routes) {
 
 $routes->get('artikel', 'Artikel::admin_index');
 $routes->add('artikel/add', 'Artikel::add');
+$routes->add('artikel/pengumuman', 'Artikel::pengumuman');
 $routes->add('artikel/edit/(:any)', 'Artikel::edit/$1');
 $routes->get('artikel/delete/(:any)', 'Artikel::delete/$1');
 });

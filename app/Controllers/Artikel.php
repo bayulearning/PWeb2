@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Models\ArtikelModel;
+use App\Models\BeritaModel;
 use CodeIgniter\Exceptions\PageNotFoundException; // Menambahkan namespace untuk exception
 use App\Models\KategoriModel;
 
@@ -10,22 +11,33 @@ class Artikel extends BaseController
     public function index()
     {
         $title = 'Daftar Warga';
-        $artikel = $artikelModel = new ArtikelModel();
+        $model = new ArtikelModel();
     
-        // Jika pakai getArtikelWithKategoriQuery()
-        $artikel = $artikelModel->getArtikelWithKategoriFiltered()->findAll();
+        $q = $this->request->getVar('q') ?? '';
+        $kategori_id = $this->request->getVar('kategori_id') ?? '';
     
-        // Atau jika pakai filter
-        // $data['artikel'] = $artikelModel->getArtikelWithKategoriFiltered($q, $kategori_id)->findAll();
+        // Ambil query builder
+        $builder = $model->getArtikelWithKategoriFiltered($q, $kategori_id);
     
-        return view('artikel/index', compact('artikel', 'title')); // Mengirim data ke view
+        // Karena paginate() tidak bisa langsung dari builder, kita gunakan model untuk pagination
+        $data['artikel'] = $builder->paginate(5);
+        $data['pager'] = $model->pager;
+    
+        $data['title'] = $title;
+        $data['q'] = $q;
+        $data['kategori_id'] = $kategori_id;
+    
+        // Ambil semua kategori untuk dropdown
+        $kategoriModel = new \App\Models\KategoriModel();
+        $data['kategori'] = $kategoriModel->asArray()->findAll();
+    
+        return view('artikel/index', $data); // Mengirim data ke view
     }
     
-
        public function indexadmin()
     {
-        $title = 'Daftar Artikel';
-        $model = new ArtikelModel();
+        $title = 'Daftar Warga';
+        $model = new BeritaModel();
         $artikel = $model->findAll(); // Mengambil semua artikel
         return view('artikel/index_admin', compact('artikel', 'title')); // Mengirim data ke view
     }
@@ -40,32 +52,68 @@ class Artikel extends BaseController
     return view('artikel/detail', $data);
     }
 
-    public function admin_index()
+    public function view_berita($slug)
     {
-        $title = 'Daftar Artikel (Admin)';
-        $model = new ArtikelModel();
-    
-        $q = $this->request->getVar('q') ?? '';
-        $kategori_id = $this->request->getVar('kategori_id') ?? '';
-    
-        // Ambil query builder
-        $builder = $model->getArtikelWithKategoriFiltered($q, $kategori_id);
-    
-        // Karena paginate() tidak bisa langsung dari builder, kita gunakan model untuk pagination
-        $data['artikel'] = $builder->paginate(2);
-        $data['pager'] = $model->pager;
-    
-        $data['title'] = $title;
-        $data['q'] = $q;
-        $data['kategori_id'] = $kategori_id;
-    
-        // Ambil semua kategori untuk dropdown
-        $kategoriModel = new \App\Models\KategoriModel();
-        $data['kategori'] = $kategoriModel->asArray()->findAll();
-    
-        return view('artikel/admin_index', $data);
+        $model = new BeritaModel();
+        $data['pengumuman'] = $model->where('slug', $slug)->first();
+
+        if (empty($data['pengumuman'])) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Cannot find the article.');
+        }
+
+        $data['title'] = $data['pengumuman']['judul'];
+        return view('pengumuman/detail_berita', $data);
     }
-    
+
+    public function view_user($slug)
+    {
+        $model = new BeritaModel();
+        $data['pengumuman'] = $model->where('slug', $slug)->first();
+
+        if (empty($data['pengumuman'])) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Cannot find the article.');
+        }
+
+        $data['title'] = $data['pengumuman']['judul'];
+        return view('user_detail/detail_berita', $data);
+    }
+
+    public function admin_index()
+{
+    $model = new \App\Models\ArtikelModel();
+    $kategoriModel = new \App\Models\KategoriModel();
+
+    $perPage = 5;
+    $q = $this->request->getVar('q') ?? '';
+    $kategori_id = $this->request->getVar('kategori_id') ?? '';
+
+    // Ambil data dengan filter
+    $builder = $model->select('artikel.*, kategori.nama_kategori')
+                     ->join('kategori', 'kategori.id_kategori = artikel.id_kategori', 'left');
+
+    if (!empty($q)) {
+        $builder->like('artikel.judul', $q);
+    }
+
+    if (!empty($kategori_id)) {
+        $builder->where('artikel.id_kategori', $kategori_id);
+    }
+
+    // Gunakan paginate() dari model
+    $artikel = $builder->paginate($perPage, 'artikel');
+
+    return view('artikel/admin_index', [
+        'title'        => 'Daftar Warga',
+        'artikel'      => $artikel,
+        'pager'        => $model->pager,
+        'kategori'     => $kategoriModel->asArray()->findAll(),
+        'q'            => $q,
+        'kategori_id'  => $kategori_id,
+        'perPage'      => $perPage,
+        'currentPage'  => $model->pager->getCurrentPage('artikel'),
+    ]);
+}
+
     
 // ... (methods add, edit, delete remain largely the same, but update to handle id_kategori)
 public function add()
@@ -101,7 +149,7 @@ public function add()
 
     // Ambil daftar kategori untuk dropdown
     $kategori = $kategoriModel->asArray()->findAll();
-    $title = "Tambah Artikel";
+    $title = "Tambah Warga";
 
     return view('artikel/form_add', compact('title', 'kategori'));
 }
@@ -188,6 +236,110 @@ public function edit($id)
     }
 
   
+    public function pengumuman()
+{
+    // Load model dan validasi
+    $artikel = new \App\Models\BeritaModel(); // ini mengacu ke tabel 'pengumuman'
+    $validation = \Config\Services::validation();
+
+    // Atur rules validasi
+    $validation->setRules([
+        'judul' => 'required',
+        'isi'   => 'required',
+        'gambar' => 'permit_empty|is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png]'
+    ]);
+
+    $isDataValid = $validation->withRequest($this->request)->run();
+
+    if ($isDataValid) {
+        $file = $this->request->getFile('gambar');
+        $fileName = null;
+
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $fileName = $file->getRandomName();
+            $file->move(ROOTPATH . 'public/gambar', $fileName);
+        }
+
+        $artikel->insert([
+            'judul'      => $this->request->getPost('judul'),
+            'isi'        => $this->request->getPost('isi'),
+            'slug'       => url_title($this->request->getPost('judul'), '-', true),
+            'gambar'     => $fileName,
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        return redirect()->to('/admin/artikel')->with('success', 'Pengumuman berhasil ditambahkan.');
+    }
+
+    // Kembalikan view tambah pengumuman
+    $title = "Tambah Pengumuman";
+    $data = [
+        'title' => $title,
+        'errors' => $validation->getErrors(),
+        'input' => $this->request->getPost(),
+    ];
+
+    return view('artikel/pengumuman', $data);
+}
+
+
+
+    public function tambah_berita()
+{
+    // Panggil model
+    $pengumumanModel = new \App\Models\BeritaModel();
+    $validation = \Config\Services::validation();
+
+    // Validasi input (tanpa kategori)
+    $validation->setRules([
+        'judul' => 'required',
+        'isi'   => 'required',
+        'gambar' => [
+            'rules' => 'permit_empty|is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png]',
+            'errors' => [
+                'is_image' => 'File harus berupa gambar.',
+                'mime_in' => 'Gambar harus berformat JPG, JPEG, atau PNG.',
+            ]
+        ]
+    ]);
+
+    // Jalankan validasi
+    $isDataValid = $validation->withRequest($this->request)->run();
+
+    if ($isDataValid) {
+        $file = $this->request->getFile('gambar');
+        $fileName = null;
+
+        // Jika file diupload dan valid
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $fileName = $file->getRandomName();
+            $file->move(ROOTPATH . 'public/gambar', $fileName);
+        }
+
+        // Simpan ke database
+        $pengumumanModel->insert([
+            'judul'      => $this->request->getPost('judul'),
+            'isi'        => $this->request->getPost('isi'),
+            'slug'       => url_title($this->request->getPost('judul'), '-', true),
+            'gambar'     => $fileName,
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        return redirect()->to('/admin/pengumuman')->with('success', 'Pengumuman berhasil ditambahkan.');
+    }
+
+    // Kembalikan view form tambah dengan data error/input
+    $title = 'Tambah Pengumuman';
+    $data = [
+        'title' => $title,
+        'errors' => $validation->getErrors(),
+        'input' => $this->request->getPost(),
+    ];
+
+    return view('artikel/form_add', $data);
+}
+
+
 }
 
     // public function edit($id) { $artikel = new ArtikelModel(); // validasi data. 

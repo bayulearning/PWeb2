@@ -12,20 +12,20 @@
     </div>
 <?php endif; ?>
 
-
+<div class="kontak">
 <form action="" method="post" enctype="multipart/form-data">
     <p>
-        <label for="judul">Judul</label><br>
+        <label for="judul">Nama</label><br>
         <input type="text" name="judul" id="judul" required value="<?= esc($input['judul'] ?? '') ?>">
     </p>
 
     <p>
-        <label for="isi">Isi</label><br>
+        <label for="isi">Alamat</label><br>
         <textarea name="isi" id="isi" cols="50" rows="10"><?= esc($input['isi'] ?? '') ?></textarea>
     </p>
 
     <p>
-        <label for="id_kategori">Kategori</label><br>
+        <label for="id_kategori">Kedudukan</label><br>
         <select name="id_kategori" id="id_kategori" required>
             <option value="">-- Pilih Kategori --</option>
             <?php foreach($kategori as $k): ?>
@@ -49,5 +49,5 @@
         <input type="submit" value="Kirim" class="btn btn-large">
     </p>
 </form>
-
+</div>
 <?= $this->include('template/admin_footer'); ?>

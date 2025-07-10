@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="<?= base_url('/style.css');?>"> 
     </head> 
 <div class="deskripsi">
-    <h1><?= $title; ?></h1> <hr> 
+    <h1 class="judul-title"><?= $title; ?></h1> <hr> 
     <p><?= $content; ?></p> 
 </div>
 
