@@ -30,7 +30,7 @@ Website “Wargaku” dibuat untuk memfasilitasi digitalisasi pelayanan dan info
 
 ## User Experience
 
-https://www.figma.com/design/1qLUigSPo5Vr3doOzcVscM/Website-Wargaku?node-id=0-1&t=rbyHOYq4kg4RihKX-1
+https://www.figma.com/proto/1qLUigSPo5Vr3doOzcVscM/Website-Wargaku?node-id=1-2&p=f&t=6gUQ0i7s2RzFSZ0r-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2
 
 # Development
 
