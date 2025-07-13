@@ -13,7 +13,7 @@
 
 <div class="about-web">
 <script src="https://unpkg.com/scrollreveal"></script>
-    <h1>Selamat Datang di Website Wargaku</h1>
+    <h1>Selamat Datang di Website<br>Wargaku</h1>
     <p>
         Website ini merupakan portal informasi dan layanan resmi Desa Sukamaju, Kecamatan Sukamakmur, Kabupaten Sejahtera.
         Melalui situs ini, masyarakat dapat mengakses berita terbaru, informasi desa, serta layanan administrasi secara online.
@@ -54,10 +54,9 @@
             <img id="galeri_desa" src="<?= base_url('gambar/desa 1.jpg') ?>" alt="">
 
             <button class="scroll-btn right" onclick="showNextImage()">&#10095;</button>
-            
+            <p>Beberapa dokumentasi</p> </div>
         </div>
-        <p>Beberapa dokumentasi</p>
-    </div>
+   
 </div>
 <div class="home-pengumuman"> 
                 <h3 class="title">Papan Pengumuman</h3> 
@@ -75,7 +74,8 @@
 <script>
   // Fungsi galeri
   const images = [
-      "<?= base_url('gambar/desa 1.jpg') ?>",
+    
+     "<?= base_url('gambar/desa 1.jpg') ?>",
       "<?= base_url('gambar/desa 4.jpeg') ?>",
       "<?= base_url('gambar/desa 5.jpg') ?>",
       "<?= base_url('gambar/desa3.jpg') ?>"

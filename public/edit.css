@@ -403,7 +403,7 @@ body {
 
 .galeri_desa p {
   margin-top: 12px;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: #666;
 }
 
@@ -520,14 +520,46 @@ body {
 
 @media (max-width: 600px) {
   .artikel-detail {
-    padding: 20px;
+    padding: 10px;
+    margin: 10px 0;
   }
 
   .artikel-detail h1 {
-    font-size: 1.5rem;
+    margin-bottom: 10px;
   }
 
-  .artikel-detail .isi-artikel {
-    font-size: 1rem;
+  .isi-artikel p {
+    margin-bottom: 12px;
+  }
+
+  section,
+  .konten,
+  .wrapper,
+  .container {
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+
+  .grid {
+    gap: 8px;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  .btn {
+    margin-top: 12px;
+  }
+}
+
+@media (width < 768px) {
+  .header__image::after {
+    position: absolute;
+    letter-spacing: 1.5rem;
+    opacity: 0.5;
+    left: 1rem;
+    top: 90%;
+    transform: translate(-50%, 0) rotate(90deg);
   }
 }
